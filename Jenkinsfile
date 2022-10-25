@@ -1,23 +1,25 @@
 pipeline {
     agent any
-    stage('build da image docker'){
-        steps{
-            sh 'docker build -t augustolustosa/node-app .'
+    stages {
+        stage('build da image docker'){
+            steps{
+                sh 'docker build -t augustolustosa/node-app .'
+            }
         }
-    }
-    stage('subir docker compose - redis e app'){
-        steps{
-            sh 'docker-compose up --build -d'
+        stage('subir docker compose - redis e app'){
+            steps{
+                sh 'docker-compose up --build -d'
+            }
         }
-    }
-    stage('sleep para subida dos containers'){
-        steps{
-            sh 'sleep 10'
+        stage('sleep para subida dos containers'){
+            steps{
+                sh 'sleep 10'
+            }
         }
-    }
-    stage('teste da aplicacao'){
-        steps{
-            sh 'teste-app.sh'
+        stage('teste da aplicacao'){
+            steps{
+                sh 'teste-app.sh'
+            }
         }
     }
 }
