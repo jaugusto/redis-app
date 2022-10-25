@@ -5,10 +5,16 @@ pipeline {
             steps{
                 sh 'docker build -t augustolustosa/node-app .'
             }
+            steps{
+                slackSend(message: "build image - OK", sendAsText: true)
+            }
         }
         stage('subir docker compose - redis e app'){
             steps{
                 sh 'docker-compose up --build -d'
+            }
+            steps{
+                slackSend(message: "upload image - OK", sendAsText: true)
             }
         }
         stage('sleep para subida dos containers'){
@@ -21,11 +27,13 @@ pipeline {
                 sh 'chmod +x teste-app.sh'
                 sh './teste-app.sh'
             }
+            steps{
+                slackSend(message: "run test app - OK", sendAsText: true)
+            }
         }
         stage('testando integracao com slack'){
             steps{
-                echo 'ola mundao testando slack integracao'
-                slackSend(message: "hello mundao", sendAsText: true)
+                slackSend(message: "Finished - OK", sendAsText: true)
             }
         }
     }
