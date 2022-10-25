@@ -22,5 +22,11 @@ pipeline {
                 sh './teste-app.sh'
             }
         }
+        stage('testando integracao com slack'){
+            steps{
+                echo 'ola mundao testando slack integracao'
+                slackSend(message: "hello mundao", sendAsText: true)
+            }
+        }
     }
 }
