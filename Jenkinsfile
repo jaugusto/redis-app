@@ -4,16 +4,12 @@ pipeline {
         stage('build da image docker'){
             steps{
                 sh 'docker build -t augustolustosa/node-app .'
-            }
-            steps{
                 slackSend(message: "build image - OK", sendAsText: true)
             }
         }
         stage('subir docker compose - redis e app'){
             steps{
                 sh 'docker-compose up --build -d'
-            }
-            steps{
                 slackSend(message: "upload image - OK", sendAsText: true)
             }
         }
@@ -26,8 +22,6 @@ pipeline {
             steps{
                 sh 'chmod +x teste-app.sh'
                 sh './teste-app.sh'
-            }
-            steps{
                 slackSend(message: "run test app - OK", sendAsText: true)
             }
         }
