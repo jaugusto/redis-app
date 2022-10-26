@@ -1,7 +1,7 @@
 #/bin/bash
-RESULT="`wget -q-O- http://localhost:8081`"
+RESULT="`wget -qO- http://localhost:8081`"
 wget -q localhost:8081
-if [$? -eq 0]
+if [ $? -eq 0 ]
 then
     echo 'ok - service on air!'
 elif [[ $RESULT == *"Number"* ]]
