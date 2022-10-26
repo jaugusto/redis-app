@@ -30,5 +30,11 @@ pipeline {
                 slackSend(message: "Finished - OK", sendAsText: true)
             }
         }
+        stage('Shutting down containers'){
+            steps{
+                sh 'docker-compose down'
+                slackSend(message: 'shutting down containers', sendAsText: true)
+            }
+        }
     }
 }
