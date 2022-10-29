@@ -21,7 +21,7 @@ pipeline {
         stage('validacao com o sonarqube'){
             steps{
                 script{
-                    def scannerHome = tool 'sonar-scanner';
+                    scannerHome = tool 'sonar-scanner';
                 }
                 withSonarQubeEnv('sonar-server'){
                     sh "${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=nodeapp  -Dsonar.sources=.  -Dsonar.host.url=${env.SONAR_HOST_URL}  -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
