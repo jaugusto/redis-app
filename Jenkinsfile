@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build da image docker'){
             steps{
-                sh 'docker build -t augustolustosa/node-app .'
+                sh 'docker build -t augustolustosa/redis-app .'
                 slackSend(message: "build image - OK", sendAsText: true)
             }
         }
@@ -24,7 +24,7 @@ pipeline {
                     scannerHome = tool 'sonar-scanner';
                 }
                 withSonarQubeEnv('sonar-server'){
-                    sh "${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=nodeapp  -Dsonar.sources=.  -Dsonar.host.url=${env.SONAR_HOST_URL}  -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
+                    sh "${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=redis-app  -Dsonar.sources=.  -Dsonar.host.url=${env.SONAR_HOST_URL}  -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
                 }
             }
         }
