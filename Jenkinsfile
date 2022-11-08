@@ -54,7 +54,7 @@ pipeline {
         stage('upload docker image'){
             steps{
                 script{
-                    withCredentials([usernamePassword(credentialsId: 'nexus-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){}
+                    withCredentials([usernamePassword(credentialsId: 'nexus-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                     sh 'docker login -u $USERNAME -p $PASSWORD ${NEXUS_URL}'
                     sh 'docker tag augustolustosa/nodeapp:latest ${NEXUS_URL}/augustolustosa/nodeapp'
                     sh 'docker push ${NEXUS_URL}/augustolustosa/nodeapp'
