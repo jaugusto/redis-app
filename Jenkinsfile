@@ -10,7 +10,7 @@ pipeline {
         stage('subir docker compose - redis e app'){
             steps{
                 sh 'docker-compose up --build -d'
-                slackSend(message: "upload image - OK", sendAsText: true)
+                slackSend(message: "subir image - OK", sendAsText: true)
             }
         }
         stage('sleep para subida dos containers'){
@@ -54,18 +54,11 @@ pipeline {
         stage('upload docker image'){
             steps{
                 script{
-<<<<<<< HEAD
                     withCredentials([usernamePassword(credentialsId: 'nexus-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){}
                     sh 'docker login -u $USERNAME -p $PASSWORD ${NEXUS_URL}'
                     sh 'docker tag augustolustosa/nodeapp:latest ${NEXUS_URL}/augustolustosa/nodeapp'
                     sh 'docker push ${NEXUS_URL}/augustolustosa/nodeapp'
                     }
-=======
-                    withCredentials([usernamePassword(credentialsId: 'nexus-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
-                    sh 'docker login -u $USERNAME -p $PASSWORD ${NEXUS_URL}'
-                    sh 'docker tag augustolustosa/nodeapp:latest ${NEXUS_URL}/augustolustosa/nodeapp'
-                    sh 'docker push ${NEXUS_URL}/augustolustosa/nodeapp'
->>>>>>> dd145fecede05df8192135c82531f175fafe2ad3
                 }
                 slackSend(message: 'uploading docker image...', sendAsText: true)
             }
